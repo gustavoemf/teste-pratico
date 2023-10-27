@@ -39,7 +39,7 @@ export class RegistroClienteComponent {
     }
 
     if (this.cliente.telefone && !this.validarTelefone(this.cliente.telefone)) {
-      alert('Telefone inválido. O telefone deve conter 11 dígitos numéricos.');
+      alert('Telefone inválido. O telefone deve conter de 10 a 14 dígitos numéricos.');
       return;
     }
 
@@ -62,7 +62,7 @@ export class RegistroClienteComponent {
 
   validarTelefone(telefone: string) {
     const cleaned = telefone.replace(/\D/g, '');
-    return cleaned.length === 11;
+    return cleaned.length >= 10 && cleaned.length <= 14;
   }
 
   formatarTelefone(telefone: string) {

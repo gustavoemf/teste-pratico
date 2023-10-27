@@ -54,7 +54,7 @@
 <div class="form-group">
   <label for="telefone">Telefone:</label>
   <input
-    type="text"
+    type="tel"
     id="telefone"
     class="form-control shadow-none"
     placeholder="Insira o telefone do cliente"
@@ -62,6 +62,8 @@
     maxlength="15"
     [(ngModel)]="cliente.telefone"
     (ngModelChange)="formatarTelefone($event)"
+    inputmode="numeric"
+    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
   />
 </div>
 
