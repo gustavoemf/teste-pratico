@@ -28,18 +28,23 @@ export class RegistroClienteComponent {
   constructor(private http: HttpClient) {}
 
   save() {
-    if (this.cliente.email == "" || this.cliente.nomeRazaoSocial == "" || this.cliente.tipoCliente == null || this.cliente.documento == null) {
-      alert('Campos obrigatórios não podem estar em branco ou vazio');
+    if (
+      this.cliente.email == '' ||
+      this.cliente.nomeRazaoSocial == '' ||
+      this.cliente.tipoCliente == null ||
+      this.cliente.documento == null
+    ) {
+      alert('Campos obrigatórios não podem estar em branco ou vazio.');
       return;
     }
 
-    if (!this.validarTelefone(this.cliente.telefone)) {
-      alert('Telefone inválido');
+    if (this.cliente.telefone && !this.validarTelefone(this.cliente.telefone)) {
+      alert('Telefone inválido. O telefone deve conter 11 dígitos numéricos.');
       return;
     }
 
     if (!this.validarEmail(this.cliente.email)) {
-      alert('E-mail inválido');
+      alert('E-mail inválido. O formato inserido não está correto.');
       return;
     }
 
@@ -55,9 +60,9 @@ export class RegistroClienteComponent {
     return emailRegex.test(email);
   }
 
-  validarTelefone(telefone: string): boolean {
-    const telefoneRegex = /^\d{10}$/;
-    return telefoneRegex.test(telefone);
+  validarTelefone(telefone: string) {
+    const cleaned = telefone.replace(/\D/g, '');
+    return cleaned.length === 11;
   }
 
   formatarTelefone(telefone: string) {
