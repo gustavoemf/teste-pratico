@@ -1,0 +1,138 @@
+<div class="form-group">
+  <label for="tipoCliente" class="required">Tipo cliente:</label>
+  <select
+    class="form-control shadow-none"
+    [(ngModel)]="cliente.tipoCliente"
+    name="tipoCliente"
+    required
+  >
+    <option *ngFor="let tipo of tiposClientes" [value]="tipo">
+      {{ tipo }}
+    </option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="documento" class="required">Documento:</label>
+  <select
+    class="form-control shadow-none"
+    [(ngModel)]="cliente.documento"
+    name="documento"
+  >
+    <option *ngFor="let tipoDoc of tiposDocumentos" [value]="tipoDoc">
+      {{ tipoDoc }}
+    </option>
+  </select>
+</div>
+
+<div class="form-group">
+  <label for="nomeRazaoSocial" class="required">Nome/Razão social:</label>
+  <input
+    type="text"
+    id="nomeRazaoSocial"
+    class="form-control shadow-none"
+    placeholder="Insira o nome ou razão social do cliente"
+    name="nomeRazaoSocial"
+    required
+    [(ngModel)]="cliente.nomeRazaoSocial"
+  />
+</div>
+
+<div class="form-group">
+  <label for="nomeFantasia">Nome fantasia:</label>
+  <input
+    type="text"
+    id="nomeFantasia"
+    class="form-control shadow-none"
+    placeholder="Insira o nome fantasia do cliente"
+    name="nomeFantasia"
+    [(ngModel)]="cliente.nomeFantasia"
+    [disabled]="cliente.tipoCliente === 'Fisico'"
+  />
+</div>
+
+<div class="form-group">
+  <label for="telefone">Telefone:</label>
+  <input
+    type="text"
+    id="telefone"
+    class="form-control shadow-none"
+    placeholder="Insira o telefone do cliente"
+    name="telefone"
+    maxlength="15"
+    [(ngModel)]="cliente.telefone"
+    (ngModelChange)="formatarTelefone($event)"
+  />
+</div>
+
+<div class="form-group">
+  <label for="email" class="required">E-mail:</label>
+  <input
+    type="email"
+    id="email"
+    class="form-control shadow-none"
+    placeholder="Insira o e-mail do cliente"
+    required
+    name="email"
+    [(ngModel)]="cliente.email"
+  />
+</div>
+
+<div class="form-group">
+  <label for="cep">CEP:</label>
+  <input
+    type="text"
+    id="cep"
+    class="form-control shadow-none"
+    placeholder="Insira o CEP do cliente"
+    minlength="8"
+    maxlength="8"
+    required
+    name="cep"
+    [(ngModel)]="cliente.cep"
+    #cepInput
+    (blur)="consultaCEP(cepInput.value)"
+  />
+</div>
+
+<div class="form-group">
+  <label for="endereco">Endereço:</label>
+  <input
+    type="text"
+    id="endereco"
+    class="form-control shadow-none"
+    name="endereco"
+    disabled
+    [(ngModel)]="cliente.endereco"
+  />
+</div>
+
+<div class="form-group">
+  <label for="bairro">Bairro:</label>
+  <input
+    type="text"
+    id="bairro"
+    class="form-control shadow-none"
+    name="bairro"
+    disabled
+    [(ngModel)]="cliente.bairro"
+  />
+</div>
+
+<div class="form-group">
+  <label for="cidade">Cidade:</label>
+  <input
+    type="text"
+    id="cidade"
+    class="form-control shadow-none"
+    name="cidade"
+    disabled
+    [(ngModel)]="cliente.cidade"
+  />
+</div>
+
+<div class="form-btn">
+  <button id="btn-modal" class="btn btn-success" (click)="save()">
+    Salvar
+  </button>
+</div>

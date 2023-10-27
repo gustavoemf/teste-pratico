@@ -1,0 +1,63 @@
+<div class="table-container">
+  <div class="button-container">
+    <button class="btn btn-success" (click)="openModal(formulario)">
+      NOVO
+    </button>
+  </div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome/Razão Social</th>
+          <th scope="col">Nome Fantasia</th>
+          <th scope="col">Tipo</th>
+          <th scope="col">Documento</th>
+          <th scope="col">CEP</th>
+          <th scope="col">Endereço</th>
+          <th scope="col">Bairro</th>
+          <th scope="col">Cidade</th>
+          <th scope="col">Telefone</th>
+          <th scope="col">E-mail</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cliente of list; let i = index">
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{ cliente.nomeRazaoSocial }}</td>
+          <td>
+            <ng-container *ngIf="cliente.nomeFantasia; else naoAplicavel">
+              {{ cliente.nomeFantasia }}
+            </ng-container>
+            <ng-template #naoAplicavel>N/A</ng-template>
+          </td>
+          <td>{{ cliente.tipoCliente }}</td>
+          <td>{{ cliente.documento }}</td>
+          <td>{{ cliente.cep }}</td>
+          <td>{{ cliente.endereco }}</td>
+          <td>{{ cliente.bairro }}</td>
+          <td>{{ cliente.cidade }}</td>
+          <td>{{ cliente.telefone }}</td>
+          <td>{{ cliente.email }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<ng-template #formulario let-modal>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h5 class="modal-title">Novo cliente</h5>
+      <button
+        type="button"
+        class="btn-close"
+        aria-label="Close"
+        (click)="modal.dismiss('Cross click')"
+      ></button>
+    </div>
+    <div class="modal-body">
+      <app-registro-cliente (retorno)="save($event)"></app-registro-cliente>
+    </div>
+  </div>
+</ng-template>
