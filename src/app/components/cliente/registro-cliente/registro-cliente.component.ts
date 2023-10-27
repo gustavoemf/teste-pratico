@@ -89,7 +89,7 @@ export class RegistroClienteComponent {
     cep = cep.replace(/\D/g, '');
 
     if (cep.length !== 8) {
-      alert('CEP inválido');
+      alert('CEP inválido ou não encontrado.');
       return;
     }
 
